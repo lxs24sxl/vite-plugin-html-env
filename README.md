@@ -3,6 +3,12 @@
 A Vite Plugin for rewriting html
 
 ## Usage
+```sh
+npm install --save-dev vite-plugin-html-env
+# or
+yarn add vite-plugin-html-env -D
+```
+
 ```js
 // vite.config.js
 import VitePluginHtmlEnv from 'vite-plugin-html-env'
