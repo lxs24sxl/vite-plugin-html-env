@@ -1,4 +1,4 @@
-# vite-plugin-html-env [![npm](https://img.shields.io/npm/v/lxs24sxl/vite-plugin-html-env.svg)](https://npmjs.com/package/lxs24sxl/vite-plugin-html-env)
+# vite-plugin-html-env [![npm](https://img.shields.io/npm/v/vite-plugin-html-env.svg)](https://npmjs.com/package/vite-plugin-html-env)
 
 A Vite Plugin for rewriting html
 
