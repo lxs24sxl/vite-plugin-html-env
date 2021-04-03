@@ -24,6 +24,30 @@ export default {
 }
 ```
 
+It is recommended to use `VITE_APP_` as the key prefix.
+
+```
+# .env
+VITE_APP_TITLE=测试标题
+VITE_APP_HOST=dev.sever****.com
+
+# .env.build-prod
+VITE_APP_TITLE=生产标题
+VITE_APP_HOST=prod.sever.****.com
+```
+
+```json
+{
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "build:prod": "tsc && vite build --mode build-prod",
+  }
+}
+```
+
+By default, the local environment reads the `.env` file.Read the corresponding `.env.***` file, when you configure the `--mode` command.Vite configuration instructions for `.env` files [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html#env-variables)
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +63,7 @@ export default {
   </body>
 </html>
 ```
+
 
 ## Config
 
