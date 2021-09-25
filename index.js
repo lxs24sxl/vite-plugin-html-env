@@ -14,8 +14,11 @@ const _loadEnv = (envPath = '.env') => {
     const data = fs.readFileSync(envFilePath, 'utf8')
 
     data.split('\n').forEach((kv) => {
-      const [key, value] = kv.replace(/\s*/g, '').split('=');
-      if (key && value) {
+      const [k, ...values] = kv.split('=')
+      const key = k.replace(/\s+/g, '')
+      const value = values.join('=').trim()
+
+      if (key) {
         res[key] = value
       }
     })
