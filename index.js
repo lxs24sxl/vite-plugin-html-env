@@ -57,7 +57,7 @@ function vitePluginHtmlEnv (config) {
 
       const map = {...ctxEnvConfig, ...config}
 
-      return html.replace(/<% (\w+) \/>/g, (match, key) => {
+      return html.replace(/<%\s+(\w+)\s+\/>/g, (match, key) => {
         return `${map[key]}`
       })
     }
