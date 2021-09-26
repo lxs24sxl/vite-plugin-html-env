@@ -26,6 +26,22 @@ const _loadEnv = (envPath = '.env') => {
   }
 }
 
+const _getModeEnvPath = () => {
+  const argvList = process.argv.slice(2)
+  const modeIndex = argvList.findIndex(arg => arg === '-m' || arg === '--mode')
+  if (
+    modeIndex !== -1 &&
+    !!argvList[modeIndex + 1] // both null vs empty
+  ) return `.env.${argvList[modeIndex + 1]}`
+}
+
+const modeEnvPath = _getModeEnvPath()
+const envConfig = Object.assign(
+  {},
+  _loadEnv('.env'),
+  !!modeEnvPath && _loadEnv(modeEnvPath),
+)
+
 function vitePluginHtmlEnv (config) {
   return {
     name: 'rollup-plugin-html-env',
@@ -36,23 +52,7 @@ function vitePluginHtmlEnv (config) {
       if (ctx.server) {
         ctxEnvConfig = loadEnv(ctx.server.config.mode, process.cwd()) || {}
       } else {
-        const argvList = process.argv.slice(2)
-        const argvLen = argvList.length
-        const envCofnig = _loadEnv('.env')
-        // If you run the build command, the plugin will read the value of .env
-        if (argvLen === 1) {
-          ctxEnvConfig = {...ctxEnvConfig, ...envCofnig}
-        } else {
-          // Only process the --mode command
-          const modeKeyIndex = argvList.findIndex(arg => arg === '--mode')
-          const modeValueIndex = modeKeyIndex + 1
-
-          if (modeKeyIndex > -1 && argvLen >= modeValueIndex) {
-            const envPath = `.env${argvList[modeValueIndex]? `.${argvList[modeValueIndex]}`: ''}`
-
-            ctxEnvConfig =  {...ctxEnvConfig, ...envCofnig, ..._loadEnv(envPath)}
-          }
-        }
+        Object.assign(ctxEnvConfig, envConfig)
       }
 
       const map = {...ctxEnvConfig, ...config}
