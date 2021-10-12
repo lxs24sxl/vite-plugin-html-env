@@ -32,10 +32,18 @@ const _loadEnv = (envPath = '.env') => {
 const _getModeEnvPath = () => {
   const argvList = process.argv.slice(2)
   const modeIndex = argvList.findIndex(arg => arg === '-m' || arg === '--mode')
+  const modeFuzzyIndex = argvList.findIndex(arg => arg.indexOf('-m') > -1 || arg.indexOf('--mode') > -1)
+
   if (
     modeIndex !== -1 &&
+    modeIndex === modeFuzzyIndex &&
     !!argvList[modeIndex + 1] // both null vs empty
   ) return `.env.${argvList[modeIndex + 1]}`
+
+  if (
+    modeFuzzyIndex !== -1 &&
+    !!argvList[modeFuzzyIndex]
+  ) return `.env.${argvList[modeFuzzyIndex].split('=')[1]}`
 }
 
 const modeEnvPath = _getModeEnvPath()
