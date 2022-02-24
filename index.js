@@ -1,6 +1,7 @@
 const { loadEnv } = require('vite')
 const path = require('path')
 const fs = require('fs')
+const { _omit, _pick } = require('./utils')
 
 const _resolve = dir => path.resolve(__dirname, dir)
 
@@ -53,11 +54,15 @@ const envConfig = Object.assign(
   !!modeEnvPath && _loadEnv(modeEnvPath),
 )
 
+const EXTRA_CONFIG = ['prefix', 'suffix']
+
 function vitePluginHtmlEnv (config) {
   return {
     name: 'rollup-plugin-html-env',
 
     transformIndexHtml (html, ctx) {
+      config = config || {}
+      const { prefix, suffix } = _pick(config, EXTRA_CONFIG) || { prefix: '<{', suffix: '}>' }
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
@@ -66,9 +71,10 @@ function vitePluginHtmlEnv (config) {
         Object.assign(ctxEnvConfig, envConfig)
       }
 
-      const map = {...ctxEnvConfig, ...config}
-
-      return html.replace(/<%\s+(\w+)\s+\/>/g, (match, key) => {
+      const map = {...ctxEnvConfig, ..._omit(config, EXTRA_CONFIG)}
+      const reg = new RegExp(`(${prefix}|<%)\\s+(\\w+)\\s+(${suffix}|\/>)`, 'g')
+      return html.replace(reg, (...arg) => {
+        const key = arg[2]
         return `${map[key]}`
       })
     }

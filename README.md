@@ -20,9 +20,17 @@ export default {
     // VitePluginHtmlEnv({
     //  CUSTOM_FIELD
     // })
+
+    // Customizable prefixes and suffixes
+    // VitePluginHtmlEnv({
+    //   prefix: '<{',
+    //   suffix: '}>',
+    // })
   ]
 }
 ```
+
+
 
 It is recommended to use `VITE_APP_` as the key prefix.
 
@@ -53,8 +61,15 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="//<% VITE_APP_HOST />/***.js"></script>
-    <title><% VITE_APP_TITLE /></title>
+    <!-- Version 1.0.4 uses prefix = <{ and suffix = }> by default -->
+    <!-- but is also compatible with older versions of prefixes and suffixes -->
+
+    <!-- <script src="//<% VITE_APP_HOST />/***.js"></script> -->
+    <!-- <title><% VITE_APP_TITLE /></title> -->
+
+    <script src="//<{ VITE_APP_HOST }>/***.js"></script>
+    <link rel="stylesheet" href="//<{ VITE_APP_HOST }>/test.css" />
+    <title><{ VITE_APP_TITLE }></title>
   </head>
 
   <body>
@@ -65,6 +80,14 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 ```
 
 
-## Config
+## Options
 
-- `{[key: string]: string | boolean | number}`
+### `prefix`
+
+- **Type:** `string`
+- **Default:** `'<{'`
+
+### `suffx`
+
+- **Type:** `string`
+- **Default:** `'}>'`
