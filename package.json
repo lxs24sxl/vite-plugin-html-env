@@ -4,7 +4,8 @@
   "description": "A vite plugin for rewriting html",
   "files": [
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "utils"
   ],
   "main": "index.js",
   "types": "index.d.ts",
