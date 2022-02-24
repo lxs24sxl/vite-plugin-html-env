@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-html-env",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A vite plugin for rewriting html",
   "files": [
     "index.js",
