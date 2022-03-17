@@ -80,7 +80,10 @@ function vitePluginHtmlEnv (config) {
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
-        ctxEnvConfig = loadEnv(ctx.server.config.mode, process.cwd()) || {}
+        const envPrefix = ctx.server?.config?.envPrefix || 'VITE_'
+        const envDir = ctx.server?.config?.envDir || process.cwd()
+
+        ctxEnvConfig = loadEnv(ctx.server.config.mode, envDir, envPrefix) || {}
       } else {
         Object.assign(ctxEnvConfig, envConfig)
       }
