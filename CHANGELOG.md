@@ -12,6 +12,11 @@ timeline: true
 - 🐞 Fix argv bug。[#2](https://github.com/lxs24sxl/vite-plugin-html-env/pull/2) [@0x0a0d](https://github.com/0x0a0d)
 - 🐞 Fix --mode xx and --mode=xx compatibility issues。[@lxs24sxl](https://github.com/lxs24sxl)
 
-## 1.0.4
+## 1.1.1
+
 `2022-02-24`
 - ⚡️ Add the attributes `prefix` and `suffix` to the incoming parameters。[@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.1.2
+`2022-04-20`
+- ⚡️ Add the attributes `envPrefixes` to customize the environment variable prefix read by loadEnv. [@lxs24sxl](https://github.com/lxs24sxl)
