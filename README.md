@@ -25,6 +25,7 @@ export default {
     // VitePluginHtmlEnv({
     //   prefix: '<{',
     //   suffix: '}>',
+    //   envPrefixes: ['VITE_', 'CUSTOME_PREFIX_']
     // })
   ]
 }
@@ -91,3 +92,9 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 
 - **Type:** `string`
 - **Default:** `'}>'`
+
+### `envPrefixes`
+Set the prefixes attribute of the `loadEnv` method in dev mode, vite uses `VITE_` as the prefix of environment variables by default.
+
+- **Type:** `string | string[]`
+- **Default:** `VITE_`

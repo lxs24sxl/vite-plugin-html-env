@@ -68,7 +68,7 @@ const envConfig = Object.assign(
   !!modeEnvPath && _loadEnv(modeEnvPath),
 )
 
-const EXTRA_CONFIG = ['prefix', 'suffix']
+const EXTRA_CONFIG = ['prefix', 'suffix', 'envPrefixes']
 
 function vitePluginHtmlEnv (config) {
   return {
@@ -76,11 +76,11 @@ function vitePluginHtmlEnv (config) {
 
     transformIndexHtml (html, ctx) {
       config = config || {}
-      const { prefix, suffix } = _pick(config, EXTRA_CONFIG) || { prefix: '<{', suffix: '}>' }
+      const { prefix, suffix, envPrefixes } = _pick(config, EXTRA_CONFIG) || { prefix: '<{', suffix: '}>', envPrefixes: 'VITE_' }
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
-        ctxEnvConfig = loadEnv(ctx.server.config.mode, process.cwd()) || {}
+        ctxEnvConfig = loadEnv(ctx.server.config.mode, process.cwd(), envPrefixes || 'VITE_') || {}
       } else {
         Object.assign(ctxEnvConfig, envConfig)
       }
