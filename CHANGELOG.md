@@ -20,3 +20,7 @@ timeline: true
 ## 1.1.2
 `2022-04-20`
 - ⚡️ Add the attributes `envPrefixes` to customize the environment variable prefix read by loadEnv. [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.1.3
+`2022-06-20`
+- 🐞 Allow passing only few options [@ottaviano](https://github.com/ottaviano)
