@@ -1,14 +1,16 @@
 # vite-plugin-html-env [![npm](https://img.shields.io/npm/v/vite-plugin-html-env.svg)](https://npmjs.com/package/vite-plugin-html-env)
 
-A Vite Plugin for rewriting html
+为html文件注入环境变量的插件
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
-## Usage
+## 使用说明
 ```sh
 npm install --save-dev vite-plugin-html-env
 # or
 yarn add vite-plugin-html-env -D
+#or
+pnpm add vite-plugin-html-env -D
 ```
 
 ```js
@@ -17,34 +19,33 @@ import VitePluginHtmlEnv from 'vite-plugin-html-env'
 
 export default {
   plugins: [
-    VitePluginHtmlEnv(),
+    // VitePluginHtmlEnv(),
+
     // or
     // VitePluginHtmlEnv({
     //  CUSTOM_FIELD
     // })
 
-    // Customizable prefixes and suffixes
+    // 自定义前缀和后缀
     // VitePluginHtmlEnv({
     //   prefix: '<{',
     //   suffix: '}>',
     //   envPrefixes: ['VITE_', 'CUSTOME_PREFIX_']
     // })
 
-    // Enable new compile mode by default
-    // 1. add directives => vite-if, vite-else
-    // 2. Compatible with `import.meta.env.VITE_APP__****`
-    // If there are compatibility issues with the new version, please raise the `issue` or submit a `merge request`, I will deal with it promptly in my personal free time.
+    // 默认开启新编译模式
+    // 1. 添加指令vite-if、vite-else
+    // 2. 兼容 import.meta.env.VITE_APP_****
+    // 如果新版本有兼容性问题，请在issue中提出问题或提交merge request，我将在个人空闲时间及时处理。
     VitePluginHtmlEnv({
       compiler: true
-      // compiler: false // old
+      // compiler: false // 旧版本
     })
   ]
 }
 ```
 
-
-
-It is recommended to use `VITE_APP_` as the key prefix.
+建议使用`VITE_APP_`作为默认的环境变量前缀。
 
 ```
 # .env
@@ -66,15 +67,15 @@ VITE_APP_HOST=prod.sever.****.com
 }
 ```
 
-By default, the local environment reads the `.env` file.Read the corresponding `.env.***` file, when you configure the `--mode` command.Vite configuration instructions for `.env` files [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html#env-variables)
+默认情况下，本地环境读取`.env`文件。当你配置`--mode`命令时，读取相应的`.env.***`文件。`.env`文件的Vite配置说明 [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html#env-variables)
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Version 1.0.4 uses prefix = <{ and suffix = }> by default -->
-    <!-- but is also compatible with older versions of prefixes and suffixes -->
+    <!-- 1.0.4版本默认使用 前缀<{ 和 后缀 }> -->。
+    <!-- 但也兼容旧版本的前缀和后缀 -->。
 
     <!-- <script src="//<% VITE_APP_HOST />/***.js"></script> -->
     <!-- <title><% VITE_APP_TITLE /></title> -->
@@ -83,15 +84,15 @@ By default, the local environment reads the `.env` file.Read the corresponding `
     <link rel="stylesheet" href="//<{ VITE_APP_HOST }>/test.css" />
     <title><{ VITE_APP_TITLE }></title>
 
-    <!-- compiler: true -->
-    <!-- Example 1 -->
+    <!-- 开启编译模式 -->
+    <!-- 例子1 -->
     <!-- VITE_APP_ENV = dev -->
     <script vite-if="import.meta.env.VITE_APP_ENV === dev">
       console.log('vite-if')
     </script>
     <script vite-else>console.log('vite-else')</script>
 
-    <!-- Example 2 -->
+    <!-- 例子2 -->
     <script vite-if="<{ VITE_APP_ENV }> !== dev">
       console.log('vite-if')
     </script>
@@ -99,7 +100,7 @@ By default, the local environment reads the `.env` file.Read the corresponding `
       console.log('vite-else')
     </script>
 
-    <!-- Example 3 -->
+    <!-- 例子3 -->
     <!-- VITE_APP_NUM_9 = 9 -->
     <script vite-if="import.meta.env.VITE_APP_NUM_9 < 10">
       console.log('9 < 10')
@@ -114,7 +115,7 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 ```
 
 
-## Options
+## 参数
 
 ### `prefix`
 
@@ -127,7 +128,7 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 - **Default:** `'}>'`
 
 ### `envPrefixes`
-Set the prefixes attribute of the `loadEnv` method in dev mode, vite uses `VITE_` as the prefix of environment variables by default.
+在dev模式下设置`loadEnv`方法的前缀属性，vite默认使用`VITE_`作为环境变量的前缀。
 
 - **Type:** `string | string[]`
 - **Default:** `VITE_`
@@ -136,4 +137,4 @@ Set the prefixes attribute of the `loadEnv` method in dev mode, vite uses `VITE_
 
 - **Type:** `boolean`
 - **Default:** `true`
-The new version of the plugin is enabled by default, and the template compilation mode is added, which contains new directives `vite-if` and `vite-else`, new parsing rules `import.meta.env.VITE_APP_***`.
+默认开启新的插件版本，添加了模版编译模式，里面包含 新增指令 `vite-if` 和 `vite-else`、新增解析规则 `import.meta.env.VITE_APP_***`。

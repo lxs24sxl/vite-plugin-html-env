@@ -1,6 +1,7 @@
 const { loadEnv } = require('vite')
 const path = require('path')
 const fs = require('fs')
+const ParseHTML = require('./parse')
 
 const _omit = (obj = {}, uselessKeys = []) => {
   return Object.keys(obj || {}).reduce((cur, key) => {
@@ -12,7 +13,7 @@ const _pick = (obj, defaultConfig = {}) => {
   return Object.keys(obj).length ? Object.keys(defaultConfig).reduce((cur, key) => {
     return {
       ...cur,
-      [key]: obj[key] || defaultConfig[key]
+      [key]: typeof obj[key] === 'boolean' ? obj[key] : obj[key] || defaultConfig[key]
     }
   }, defaultConfig) : defaultConfig
 }
@@ -72,6 +73,7 @@ const DEFAULT_CONFIG = {
   prefix: '<{',
   suffix: '}>',
   envPrefixes: 'VITE_',
+  compiler: true
 }
 
 function vitePluginHtmlEnv (config) {
@@ -80,7 +82,7 @@ function vitePluginHtmlEnv (config) {
 
     transformIndexHtml (html, ctx) {
       config = config || {}
-      const { prefix, suffix, envPrefixes } = _pick(config, DEFAULT_CONFIG)
+      const { prefix, suffix, envPrefixes, compiler } = _pick(config, DEFAULT_CONFIG)
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
@@ -90,6 +92,19 @@ function vitePluginHtmlEnv (config) {
       }
 
       const map = {...ctxEnvConfig, ..._omit(config, Object.keys(DEFAULT_CONFIG))}
+
+      if (compiler) {
+        const parseHtml = new ParseHTML(html, {
+          ...map,
+          prefix,
+          suffix
+        })
+
+        parseHtml.parse()
+
+        return parseHtml.generate()
+      }
+
       const reg = new RegExp(`(${prefix}|<%)\\s+(\\w+)\\s+(${suffix}|\/>)`, 'g')
       return html.replace(reg, (...arg) => {
         const key = arg[2]

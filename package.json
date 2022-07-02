@@ -5,11 +5,16 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "utils"
+    "utils",
+    "src",
+    "lib",
+    "package.json",
+    "README.md"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "types": "index.d.ts",
   "scripts": {
+    "build": "father-build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,15 +27,19 @@
   "keywords": [
     "vite",
     "vite-plugin",
-    "html"
+    "html",
+    "compiler"
   ],
-  "author": "lxs24sxl",
+  "author": "lxs24sxl <lxs24sxl@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lxs24sxl/vite-plugin-html-env/issues"
   },
-  "homepage": "https://github.com/lxs24sxl/vite-plugin-html-env#readme",
+  "homepage": "https://github.com/lxs24sxl/vite-plugin-html-env#README.md",
   "peerDependencies": {
     "vite": "^2.1.3"
+  },
+  "devDependencies": {
+    "father-build": "^1.22.3"
   }
 }
