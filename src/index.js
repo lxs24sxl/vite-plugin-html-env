@@ -5,8 +5,8 @@ const ParseHTML = require('./parse')
 
 const _omit = (obj = {}, uselessKeys = []) => {
   return Object.keys(obj || {}).reduce((cur, key) => {
-    return uselessKeys.includes(key) ? cur: {...cur, [key]: obj[key]}
-  },  {})
+    return uselessKeys.includes(key) ? cur : { ...cur, [key]: obj[key] }
+  }, {})
 }
 
 const _pick = (obj, defaultConfig = {}) => {
@@ -18,10 +18,11 @@ const _pick = (obj, defaultConfig = {}) => {
   }, defaultConfig) : defaultConfig
 }
 
-const _resolve = dir => path.resolve(__dirname, dir)
+const _resolve = (...arg) => path.resolve(__dirname, ...arg)
 
 const _loadEnv = (envPath = '.env') => {
-  const envFilePath = _resolve(`${process.cwd()}/${envPath}`)
+  const envFilePath = _resolve(process.cwd(), envPath)
+
   try {
     let res = {}
 
@@ -63,11 +64,15 @@ const _getModeEnvPath = () => {
 }
 
 const modeEnvPath = _getModeEnvPath()
-const envConfig = Object.assign(
-  {},
-  _loadEnv('.env'),
-  !!modeEnvPath && _loadEnv(modeEnvPath),
-)
+
+const getEnvConfig = (envDir = '') => {
+  const prefix = envDir ? `${envDir}/` : ''
+  return Object.assign(
+    {},
+    _loadEnv(`${prefix}.env`),
+    !!modeEnvPath && _loadEnv(`${prefix}${modeEnvPath}`),
+  )
+}
 
 const DEFAULT_CONFIG = {
   prefix: '<{',
@@ -77,8 +82,16 @@ const DEFAULT_CONFIG = {
 }
 
 function vitePluginHtmlEnv (config) {
+  let cacheEnvDir = ''
+
   return {
     name: 'rollup-plugin-html-env',
+
+    config (cfg) {
+      if (cfg && cfg.envDir) {
+        cacheEnvDir = cfg && cfg.envDir
+      }
+    },
 
     transformIndexHtml (html, ctx) {
       config = config || {}
@@ -86,12 +99,13 @@ function vitePluginHtmlEnv (config) {
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
-        ctxEnvConfig = loadEnv(ctx.server.config.mode, process.cwd(), envPrefixes || 'VITE_') || {}
+        const envDirPath = _resolve(process.cwd(), cacheEnvDir)
+        ctxEnvConfig = loadEnv(ctx.server.config.mode, envDirPath, envPrefixes || 'VITE_') || {}
       } else {
-        Object.assign(ctxEnvConfig, envConfig)
+        Object.assign(ctxEnvConfig, getEnvConfig(cacheEnvDir))
       }
 
-      const map = {...ctxEnvConfig, ..._omit(config, Object.keys(DEFAULT_CONFIG))}
+      const map = { ...ctxEnvConfig, ..._omit(config, Object.keys(DEFAULT_CONFIG)) }
 
       if (compiler) {
         const parseHtml = new ParseHTML(html, {

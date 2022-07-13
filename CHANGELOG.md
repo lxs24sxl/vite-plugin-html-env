@@ -24,3 +24,12 @@ timeline: true
 ## 1.1.3
 `2022-06-20`
 - 🐞 Allow passing only few options [@ottaviano](https://github.com/ottaviano)
+
+## 1.2.0
+`2022-07-03`
+- ⚡️ Add the attributes `compiler` [@lxs24sxl](https://github.com/lxs24sxl)
+  - The new version of the plugin is enabled by default, and the template compilation mode is added, which contains new directives `vite-if` and `vite-else`, new parsing rules `import.meta.env.VITE_APP_***`.
+
+## 1.2.1
+`2022-07-13`
+- Compatible with [envDir](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#envdir-changes) configuration. [@lxs24sxl](https://github.com/lxs24sxl)
