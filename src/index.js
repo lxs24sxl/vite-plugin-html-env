@@ -90,6 +90,10 @@ function vitePluginHtmlEnv (config) {
     config (cfg) {
       if (cfg && cfg.envDir) {
         cacheEnvDir = cfg && cfg.envDir
+      } else {
+        // The directory from which .env files are loaded. Can be an absolute path, or a path relative to the project root.
+        // https://vitejs.dev/config/shared-options.html#envdir
+        cacheEnvDir = cfg.root || ''
       }
     },
 

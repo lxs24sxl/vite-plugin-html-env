@@ -32,4 +32,8 @@ timeline: true
 
 ## 1.2.1
 `2022-07-13`
-- Compatible with [envDir](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#envdir-changes) configuration. [@lxs24sxl](https://github.com/lxs24sxl)
+- ⚡️ Compatible with [envDir](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#envdir-changes) configuration. [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.2
+`2022-07-14`
+- ⚡️ Compatible with [root](https://cn.vitejs.dev/config/shared-options.html#root) configuration. [@lxs24sxl](https://github.com/lxs24sxl)
