@@ -141,4 +141,4 @@ The new version of the plugin is enabled by default, and the template compilatio
 ### `enforce`
 - **Type:** `string`
 - **Default:** `null`
-The value of enforce can be either "pre" or "post". (plugin-ordering)[https://vitejs.dev/guide/api-plugin.html#plugin-ordering]
+The value of enforce can be either "pre" or "post". [plugin-ordering](https://vitejs.dev/guide/api-plugin.html#plugin-ordering])
