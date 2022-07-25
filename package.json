@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/lxs24sxl/vite-plugin-html-env#README.md",
   "peerDependencies": {
-    "vite": "^2.1.3"
+    "vite": "*"
   },
   "devDependencies": {
     "father-build": "^1.22.3"

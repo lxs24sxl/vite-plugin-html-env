@@ -3,6 +3,8 @@ const path = require('path')
 const fs = require('fs')
 const ParseHTML = require('./parse')
 
+const REGEXP_SYNTAX_CHARACTER = /[\[\]\(\)\.\+\^\$\*\!]/g
+
 const _omit = (obj = {}, uselessKeys = []) => {
   return Object.keys(obj || {}).reduce((cur, key) => {
     return uselessKeys.includes(key) ? cur : { ...cur, [key]: obj[key] }
@@ -78,28 +80,17 @@ const DEFAULT_CONFIG = {
   prefix: '<{',
   suffix: '}>',
   envPrefixes: 'VITE_',
-  compiler: true
+  compiler: true,
+  enforce: null
 }
 
 function vitePluginHtmlEnv (config) {
   let cacheEnvDir = ''
+  config = config || {}
+  let { prefix, suffix, envPrefixes, compiler, enforce } = _pick(config, DEFAULT_CONFIG)
 
-  return {
-    name: 'rollup-plugin-html-env',
-
-    config (cfg) {
-      if (cfg && cfg.envDir) {
-        cacheEnvDir = cfg && cfg.envDir
-      } else {
-        // The directory from which .env files are loaded. Can be an absolute path, or a path relative to the project root.
-        // https://vitejs.dev/config/shared-options.html#envdir
-        cacheEnvDir = cfg.root || ''
-      }
-    },
-
-    transformIndexHtml (html, ctx) {
-      config = config || {}
-      const { prefix, suffix, envPrefixes, compiler } = _pick(config, DEFAULT_CONFIG)
+  let transformIndexHtml = {
+    transform (html, ctx) {
       let ctxEnvConfig = {}
       // Use the loadEnv method provided by vite, because the code checks that it is a dev environment
       if (ctx.server) {
@@ -110,6 +101,9 @@ function vitePluginHtmlEnv (config) {
       }
 
       const map = { ...ctxEnvConfig, ..._omit(config, Object.keys(DEFAULT_CONFIG)) }
+
+      prefix = prefix.replace(REGEXP_SYNTAX_CHARACTER, (...arg) => `\\${arg[0]}`)
+      suffix = suffix.replace(REGEXP_SYNTAX_CHARACTER, (...arg) => `\\${arg[0]}`)
 
       if (compiler) {
         const parseHtml = new ParseHTML(html, {
@@ -129,6 +123,24 @@ function vitePluginHtmlEnv (config) {
         return `${map[key]}`
       })
     }
+  }
+
+  if (enforce) transformIndexHtml.enforce = enforce
+
+  return {
+    name: 'rollup-plugin-html-env',
+
+    config (cfg) {
+      if (cfg && cfg.envDir) {
+        cacheEnvDir = cfg && cfg.envDir
+      } else {
+        // The directory from which .env files are loaded. Can be an absolute path, or a path relative to the project root.
+        // https://vitejs.dev/config/shared-options.html#envdir
+        cacheEnvDir = cfg.root || ''
+      }
+    },
+
+    transformIndexHtml
   }
 }
 

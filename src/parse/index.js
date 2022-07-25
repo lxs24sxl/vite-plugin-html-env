@@ -1,6 +1,6 @@
 const { removeComments } = require("../utils")
 const DOCTYPE_REG = /^<!DOCTYPE [^>]+>/i
-const LETTER_REG = /[a-zA-Z\-]/
+const LETTER_REG = /[a-zA-Z\-@\.]/
 const EMPTY_REG = /[\s\n]/
 const NUMBER_REG = /^[\+-]?(\d+\.?\d*|\.\d+|\d\.\d+e\+\d+)$/
 
@@ -63,7 +63,7 @@ module.exports = class ParseHTML {
     this.attributeValue = ''
     this.doctype = ''
 
-     // node
+    // node
     this.node = null
     this.current = null
     this.parent = null
@@ -72,7 +72,7 @@ module.exports = class ParseHTML {
     this.effectStack = []
   }
 
-  preHandle() {
+  preHandle () {
     // Clear the html comments
     this.html = this.html.replace(/<!\-\-.+\-\->/g, '')
     // Clear multi-line comments and single-line comments
@@ -87,14 +87,15 @@ module.exports = class ParseHTML {
     this.html = this.html.replace(/[\s]+\/>/g, '/>')
     this.html = this.html.replace(/[\s]*=[\s]*"/g, '="')
 
-    const { prefix, suffix } = this.options
+    let { prefix, suffix } = this.options
+
     const reg = new RegExp(`(${prefix}|<%)\\s*([\\w\\-]+)\\s*(${suffix}|\/>)`, 'g')
 
     this.html = this.html.replace(reg, (...arg) => `${this.options[arg[2]] || ''}`)
     this.html = this.html.replace(/import\.meta\.env\.([a-zA-Z_\-]+)/g, (...arg) => `${this.options[arg[1]] || ''}`)
   }
 
-  advance(n) {
+  advance (n) {
     this.index += n
     this.html = this.html.substring(n)
   }
@@ -296,7 +297,7 @@ module.exports = class ParseHTML {
 
   generateTextNodeEvent () {
     if (!this.text) return
-    this.current.children.push(createNode({ tag: '', text: this.text.trim(), type: 'textNode'}))
+    this.current.children.push(createNode({ tag: '', text: this.text.trim(), type: 'textNode' }))
     this.text = ''
   }
 
@@ -404,7 +405,7 @@ module.exports = class ParseHTML {
         }
 
         if (type === 'textNode') {
-          if ( this.checkOnlyOneTextNode(parent)) return
+          if (this.checkOnlyOneTextNode(parent)) return
           html += '\n'
           return
         }

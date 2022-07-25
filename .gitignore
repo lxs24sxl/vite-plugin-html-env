@@ -4,6 +4,7 @@ yarn-error.log
 node_modules/
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 .vscode
 lib
 __tests__
