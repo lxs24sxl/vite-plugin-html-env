@@ -1,9 +1,4 @@
----
-order: 6
-title: Change Log
-toc: false
-timeline: true
----
+# changelog
 
 ## 1.0.3
 
@@ -37,3 +32,10 @@ timeline: true
 ## 1.2.2
 `2022-07-14`
 - ⚡️ Compatible with [root](https://cn.vitejs.dev/config/shared-options.html#root) configuration. [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.3
+`2022-07-25`
+- 🐞 attribute contains the @ and . symbols, the tag is read incorrectly [#14](https://github.com/lxs24sxl/vite-plugin-html-env/pull/14) [@lxs24sxl](https://github.com/lxs24sxl)
+- 🐞 Available in REGEXP-SYNTAX CHARACTER prefix and suffix. [#14](https://github.com/lxs24sxl/vite-plugin-html-env/pull/14) [@lxs24sxl](https://github.com/lxs24sxl)
+- 🐞 peer dependency warning. [#16](https://github.com/lxs24sxl/vite-plugin-html-env/pull/16) [@lxs24sxl](https://github.com/lxs24sxl)
+- ⚡️ Add the attributes `enforce` [@lxs24sxl](https://github.com/lxs24sxl)

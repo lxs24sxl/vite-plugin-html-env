@@ -137,3 +137,8 @@ Set the prefixes attribute of the `loadEnv` method in dev mode, vite uses `VITE_
 - **Type:** `boolean`
 - **Default:** `true`
 The new version of the plugin is enabled by default, and the template compilation mode is added, which contains new directives `vite-if` and `vite-else`, new parsing rules `import.meta.env.VITE_APP_***`.
+
+### `enforce`
+- **Type:** `string`
+- **Default:** `null`
+The value of enforce can be either "pre" or "post". (plugin-ordering)[https://vitejs.dev/guide/api-plugin.html#plugin-ordering]
