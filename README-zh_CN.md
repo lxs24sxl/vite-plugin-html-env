@@ -137,14 +137,17 @@ VITE_APP_HOST=prod.sever.****.com
 
 - **Type:** `boolean`
 - **Default:** `true`
+
 默认开启新的插件版本，添加了模版编译模式，里面包含 新增指令 `vite-if` 和 `vite-else`、新增解析规则 `import.meta.env.VITE_APP_***`。
 
 ### `enforce`
 - **Type:** `string`
 - **Default:** `null`
+
 enforce 的值可以是pre 或 post。[plugin-ordering](https://vitejs.dev/guide/api-plugin.html#plugin-ordering)
 
 ### `compress`
 - **Type:** `boolean`
 - **Default:** `false`
+
 简单的压缩功能: 移除空格和换行符
