@@ -39,3 +39,7 @@
 - 🐞 前缀和后缀中可以使用正则表达式的符号。[#14](https://github.com/lxs24sxl/vite-plugin-html-env/pull/14) [@lxs24sxl](https://github.com/lxs24sxl)
 - 🐞 peer依赖警告问题。[#16](https://github.com/lxs24sxl/vite-plugin-html-env/pull/16) [@lxs24sxl](https://github.com/lxs24sxl)
 - ⚡️ 添加属性`enforce` [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.4
+`2022-07-28`
+- 🐞 修复 替换规则的符号前面的空格被清除 问题 [#17](https://github.com/lxs24sxl/vite-plugin-html-env/pull/17) [@lxs24sxl](https://github.com/lxs24sxl)

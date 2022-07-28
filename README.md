@@ -142,3 +142,9 @@ The new version of the plugin is enabled by default, and the template compilatio
 - **Type:** `string`
 - **Default:** `null`
 The value of enforce can be either "pre" or "post". [plugin-ordering](https://vitejs.dev/guide/api-plugin.html#plugin-ordering])
+
+
+### `compress`
+- **Type:** `boolean`
+- **Default:** `false`
+Simple compression: remove spaces and line breaks

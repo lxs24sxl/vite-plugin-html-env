@@ -143,3 +143,8 @@ VITE_APP_HOST=prod.sever.****.com
 - **Type:** `string`
 - **Default:** `null`
 enforce 的值可以是pre 或 post。[plugin-ordering](https://vitejs.dev/guide/api-plugin.html#plugin-ordering)
+
+### `compress`
+- **Type:** `boolean`
+- **Default:** `false`
+简单的压缩功能: 移除空格和换行符

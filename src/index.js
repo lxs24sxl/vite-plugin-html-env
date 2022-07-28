@@ -81,13 +81,14 @@ const DEFAULT_CONFIG = {
   suffix: '}>',
   envPrefixes: 'VITE_',
   compiler: true,
-  enforce: null
+  enforce: null,
+  compress: false
 }
 
 function vitePluginHtmlEnv (config) {
   let cacheEnvDir = ''
   config = config || {}
-  let { prefix, suffix, envPrefixes, compiler, enforce } = _pick(config, DEFAULT_CONFIG)
+  let { prefix, suffix, envPrefixes, compiler, enforce, compress } = _pick(config, DEFAULT_CONFIG)
 
   let transformIndexHtml = {
     transform (html, ctx) {
@@ -109,7 +110,8 @@ function vitePluginHtmlEnv (config) {
         const parseHtml = new ParseHTML(html, {
           ...map,
           prefix,
-          suffix
+          suffix,
+          compress
         })
 
         parseHtml.parse()

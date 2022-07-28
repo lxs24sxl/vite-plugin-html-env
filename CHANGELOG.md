@@ -39,3 +39,7 @@
 - 🐞 Available in REGEXP-SYNTAX CHARACTER prefix and suffix. [#14](https://github.com/lxs24sxl/vite-plugin-html-env/pull/14) [@lxs24sxl](https://github.com/lxs24sxl)
 - 🐞 peer dependency warning. [#16](https://github.com/lxs24sxl/vite-plugin-html-env/pull/16) [@lxs24sxl](https://github.com/lxs24sxl)
 - ⚡️ Add the attributes `enforce` [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.4
+`2022-07-28`
+- 🐞 fix The spaces in front of the symbols of the substitution rule are cleared [#17](https://github.com/lxs24sxl/vite-plugin-html-env/pull/17) [@lxs24sxl](https://github.com/lxs24sxl)

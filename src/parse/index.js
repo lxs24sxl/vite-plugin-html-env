@@ -81,10 +81,7 @@ module.exports = class ParseHTML {
     this.html = this.html.replace(/\n[ ]+/g, ' ')
     this.html = this.html.replace(/\n/g, '')
     this.html = this.html.replace(/[ ]+/g, ' ')
-    this.html = this.html.replace(/<[\s]+/g, '<')
-    this.html = this.html.replace(/[\s]+</g, '<')
-    this.html = this.html.replace(/[\s]+>/g, '>')
-    this.html = this.html.replace(/[\s]+\/>/g, '/>')
+
     this.html = this.html.replace(/[\s]*=[\s]*"/g, '="')
 
     let { prefix, suffix } = this.options
@@ -93,6 +90,11 @@ module.exports = class ParseHTML {
 
     this.html = this.html.replace(reg, (...arg) => `${this.options[arg[2]] || ''}`)
     this.html = this.html.replace(/import\.meta\.env\.([a-zA-Z_\-]+)/g, (...arg) => `${this.options[arg[1]] || ''}`)
+
+    this.html = this.html.replace(/<[\s]+/g, '<')
+    this.html = this.html.replace(/[\s]+</g, '<')
+    this.html = this.html.replace(/[\s]+>/g, '>')
+    this.html = this.html.replace(/[\s]+\/>/g, '/>')
   }
 
   advance (n) {
@@ -371,12 +373,13 @@ module.exports = class ParseHTML {
 
         if (type === 'textNode') {
           if (!this.checkOnlyOneTextNode(parent)) {
-            html += Array.from({ length: depth }).fill('\t').join('')
+            html += Array.from({ length: depth - 1 }).fill('\t').join('')
           }
           html += text
           return
         }
-        html += Array.from({ length: depth }).fill('\t').join('')
+
+        html += Array.from({ length: depth - 1 }).fill('\t').join('')
 
         if (CLOSE_TAG_MAP[tag]) {
           html += `<${tag}${attributeText}/>\n`
@@ -398,7 +401,7 @@ module.exports = class ParseHTML {
         const { tag, text, children, type } = tree
         if (CLOSE_TAG_MAP[tag]) return
 
-        const length = text || children.length === 0 ? 0 : depth
+        const length = text || children.length === 0 ? 0 : depth - 1
 
         if (!this.checkOnlyOneTextNode(tree)) {
           html += Array.from({ length }).fill('\t').join('')
@@ -413,6 +416,19 @@ module.exports = class ParseHTML {
         html += `</${tag}>\n`
       }
     })
+
+    // Simple compression:
+    // remove spaces and line breaks
+    if (this.options.compress) {
+      html = html.replace(/\n[ ]+/g, ' ')
+      html = html.replace(/\n/g, '')
+      html = html.replace(/[ ]+/g, ' ')
+      html = html.replace(/[\s]*=[\s]*"/g, '="')
+      html = html.replace(/<[\s]+/g, '<')
+      html = html.replace(/[\s]+</g, '<')
+      html = html.replace(/[\s]+>/g, '>')
+      html = html.replace(/[\s]+\/>/g, '/>')
+    }
 
     return html
   }
