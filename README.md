@@ -121,7 +121,7 @@ By default, the local environment reads the `.env` file.Read the corresponding `
 - **Type:** `string`
 - **Default:** `'<{'`
 
-### `suffx`
+### `suffix`
 
 - **Type:** `string`
 - **Default:** `'}>'`
