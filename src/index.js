@@ -69,10 +69,14 @@ const modeEnvPath = _getModeEnvPath()
 
 const getEnvConfig = (envDir = '') => {
   const prefix = envDir ? `${envDir}/` : ''
+  const modeEnvConfig = !!modeEnvPath ? _loadEnv(`${prefix}${modeEnvPath}`) : {}
+  const productionEnvConfig = modeEnvConfig.NODE_ENV === 'production' ? _loadEnv(`${prefix}.env.production`) : {}
+
   return Object.assign(
     {},
     _loadEnv(`${prefix}.env`),
-    !!modeEnvPath && _loadEnv(`${prefix}${modeEnvPath}`),
+    productionEnvConfig,
+    modeEnvConfig,
   )
 }
 

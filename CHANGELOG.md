@@ -43,3 +43,8 @@
 ## 1.2.4
 `2022-07-28`
 - 🐞 fix The spaces in front of the symbols of the substitution rule are cleared [#17](https://github.com/lxs24sxl/vite-plugin-html-env/pull/17) [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.5
+`2022-09-26`
+- 🐞 Fix url paths being recognized as comments issue [#20])(https://github.com/lxs24sxl/vite-plugin-html-env/issues/20) [@lxs24sxl](https://github.com/ lxs24sxl)
+- 🐞 Add production-like behavior [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)

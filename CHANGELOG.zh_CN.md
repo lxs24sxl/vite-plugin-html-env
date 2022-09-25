@@ -43,3 +43,8 @@
 ## 1.2.4
 `2022-07-28`
 - 🐞 修复 替换规则的符号前面的空格被清除 问题 [#17](https://github.com/lxs24sxl/vite-plugin-html-env/pull/17) [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.5
+`2022-09-26`
+- 🐞 修复 url路径被识别成注释 问题 [#20])(https://github.com/lxs24sxl/vite-plugin-html-env/issues/20) [@lxs24sxl](https://github.com/lxs24sxl)
+- 🐞 添加 预生产行为 [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)
