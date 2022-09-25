@@ -48,3 +48,7 @@
 `2022-09-26`
 - 🐞 修复 url路径被识别成注释 问题 [#20])(https://github.com/lxs24sxl/vite-plugin-html-env/issues/20) [@lxs24sxl](https://github.com/lxs24sxl)
 - 🐞 添加 预生产行为 [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.6
+`202-09-26`
+- ⚡️ 更新声明文件 [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/24) [leekoho](https://github.com/leekoho)

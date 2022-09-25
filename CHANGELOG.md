@@ -48,3 +48,7 @@
 `2022-09-26`
 - 🐞 Fix url paths being recognized as comments issue [#20])(https://github.com/lxs24sxl/vite-plugin-html-env/issues/20) [@lxs24sxl](https://github.com/ lxs24sxl)
 - 🐞 Add production-like behavior [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)
+
+## 1.2.6
+`202-09-26`
+- ⚡️ Update statement document [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/24) [leekoho](https://github.com/leekoho)
