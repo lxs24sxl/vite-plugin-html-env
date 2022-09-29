@@ -73,16 +73,19 @@ module.exports = class ParseHTML {
   }
 
   preHandle () {
-    // Clear the html comments
-    this.html = this.html.replace(/<!\-\-.+\-\->/g, '')
     // Clear multi-line comments and single-line comments
     this.html = removeComments(this.html)
 
-    this.html = this.html.replace(/\n[ ]+/g, ' ')
-    this.html = this.html.replace(/\n/g, '')
+    if (this.options.replaceLinefeed) {
+      this.html = this.html.replace(/\n[ ]+/g, ' ')
+      this.html = this.html.replace(/\n/g, '')
+    }
+
     this.html = this.html.replace(/[ ]+/g, ' ')
 
     this.html = this.html.replace(/[\s]*=[\s]*"/g, '="')
+    // Clear the html comments
+    this.html = this.html.replace(/<!\-\-(\s|\S)*\-\->/g, '')
 
     let { prefix, suffix } = this.options
 
