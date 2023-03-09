@@ -105,6 +105,13 @@ function vitePluginHtmlEnv (config) {
       } else {
         Object.assign(ctxEnvConfig, getEnvConfig(cacheEnvDir))
       }
+      
+      // Load system environment variables, supporting deploy services like Netlify
+      Object.keys(process.env).forEach(key => {
+        if (key.startsWith(envPrefixes || 'VITE_')) {
+          ctxEnvConfig[key] = process.env[key]
+        }
+      })
 
       const map = { ...ctxEnvConfig, ..._omit(config, Object.keys(DEFAULT_CONFIG)) }
 
