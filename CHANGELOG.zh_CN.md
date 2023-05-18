@@ -50,5 +50,12 @@
 - 🐞 添加 预生产行为 [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)
 
 ## 1.2.6
-`202-09-26`
+`2022-09-26`
 - ⚡️ 更新声明文件 [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/24) [leekoho](https://github.com/leekoho)
+
+## 1.2.7
+`2022-09-29`
+- ⚡️ 修复解析bug (https://github.com/lxs24sxl/vite-plugin-html-env/issues/25)[@lxs24sxl](https://github.com/lxs24sxl)
+## 1.2.8
+`2023-05-18`
+- ⚡️ 支持 `process.env` [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/32) [guoyunhe](https://github.com/guoyunhe)

@@ -50,5 +50,12 @@
 - 🐞 Add production-like behavior [#23](https://github.com/lxs24sxl/vite-plugin-html-env/issues/23) [@lxs24sxl](https://github.com/lxs24sxl)
 
 ## 1.2.6
-`202-09-26`
+`2022-09-26`
 - ⚡️ Update statement document [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/24) [leekoho](https://github.com/leekoho)
+
+## 1.2.7
+`2022-09-29`
+- ⚡️ Fix parsing bug (https://github.com/lxs24sxl/vite-plugin-html-env/issues/25)[@lxs24sxl](https://github.com/lxs24sxl)
+## 1.2.8
+`2023-05-18`
+- ⚡️ Support for `process.env` [#24](https://github.com/lxs24sxl/vite-plugin-html-env/pull/32) [guoyunhe](https://github.com/guoyunhe)
