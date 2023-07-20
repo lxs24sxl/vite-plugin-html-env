@@ -2,6 +2,8 @@
 
 为html文件注入环境变量的插件
 
+`vite@4.2.0`已经支持在`html`文件使用`env`变量, 建议使用官方的方案，感谢各位使用和支持`vite-plugin-html-env`。
+
 [English](./README.md) | 简体中文
 
 ## 使用说明

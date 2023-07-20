@@ -2,6 +2,8 @@
 
 A Vite Plugin for rewriting html
 
+`vite@4.2.0` already supports replacing `env` variables in `html` files, it is recommended to use the official solution, thanks for using and supporting `vite-plugin-html-env`.
+
 English | [简体中文](./README-zh_CN.md)
 
 ## Usage
